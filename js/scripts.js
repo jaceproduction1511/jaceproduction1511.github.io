@@ -220,7 +220,6 @@ $(document).ready(function () {
                     $('#rsvp-modal').modal('show');
                 })
                 .fail(function (data) {
-                    console.log(data);
                     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
                 });
     });
