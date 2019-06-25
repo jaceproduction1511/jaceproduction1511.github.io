@@ -192,7 +192,7 @@ $(document).ready(function () {
             // Event duration (IN MINUTES)
             // duration: 120,
 
-            // You can also choose to set an end time
+            // You can also choose to set an end time  test
             // If an end time is set, this will take precedence over duration
             end: new Date('July 27, 2019 00:00'),
 
