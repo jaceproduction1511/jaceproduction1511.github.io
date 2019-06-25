@@ -230,18 +230,69 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var itc_kol = {lat: 30.464728, lng: -97.613683};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 10,
-        center: itc_kol,
-        scrollwheel: false
-    });
+  var broadway = {
+    info:
+      '<strong>Home Sweet Home</strong><br>\
+        920 Great Sand Dunes<br> Pflugerville, TX 78660<br>',
+    lat: 30.464728, 
+    lng: -97.613683
+  }
 
-    var marker = new google.maps.Marker({
-        position: itc_kol,
-        map: map
-    });
+  var belmont = {
+    info:
+      '<strong>Chapel Dulcinea</strong><br>\
+        16221 Crystal Hills Drive, Crystal Hills Dr<br> Austin, TX 78737<br>',
+    lat: 30.147025,
+    long: -97.966799,
+  }
+
+  var locations = [
+    [broadway.info, broadway.lat, broadway.long, 0],
+    [belmont.info, belmont.lat, belmont.long, 1],
+  ]
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: new google.maps.LatLng(30.464728, -97.613683),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  })
+
+  var infowindow = new google.maps.InfoWindow({})
+
+  var marker, i
+
+  for (i = 0; i < locations.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map,
+    })
+
+    google.maps.event.addListener(
+      marker,
+      'click',
+      (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0])
+          infowindow.open(map, marker)
+        }
+      })(marker, i)
+    )
+  }
 }
+
+// function initMap() {
+//     var itc_kol = {lat: 30.464728, lng: -97.613683};
+//     var map = new google.maps.Map(document.getElementById('map-canvas'), {
+//         zoom: 10,
+//         center: itc_kol,
+//         scrollwheel: false
+//     });
+
+//     var marker = new google.maps.Marker({
+//         position: itc_kol,
+//         map: map
+//     });
+// }
 
 function initBBSRMap() {
     var la_fiesta = {lat: 30.464728, lng: -97.613683};
